@@ -8,10 +8,10 @@ function EditCreative(props) {
     const [email, setEmail] = useState('');
     const [facebook, setFacebook] = useState('');
     const [options, setOptions] = useState(new Map(
-        [["Music", [false,1]],
-        ["Dance", [false,2]],
-        ["Fashion", [false,3]],
-        ["Photography", [false,4]]]
+        [["Music", 1],
+        ["Dance", 2],
+        ["Fashion", 3],
+        ["Photography", 4]]
     ));
     const [mediums, setMediums] = useState([]);
 
@@ -25,7 +25,7 @@ function EditCreative(props) {
             setMediums(res.data.mediums);
         })
         .catch(err => console.log(err));
-    })
+    },[])
 
     useEffect(() => {
         const mediumsTable = document.getElementById('mediums');
@@ -38,28 +38,34 @@ function EditCreative(props) {
     },[searchedMedium]);   
     
     const handleMediumsClick = (event, option) => {
-        console.log("Handling the click");
         
-        if(!option[1][0]) {
-            const mergedOption = new Map([[option[0],[true, option[1][1]]]]);
-            console.log(mergedOption);
-            setOptions(new Map([...options, ...mergedOption]));
+        if(mediums.includes(option[0])) {
+            console.log(mediums);
+            console.log(option[0]);
+            setMediums(mediums.filter(element => { return element !== option[0]}));
         }
         else {
-            const mergedOption = new Map([[option[0],[false, option[1][1]]]]);
-            console.log(mergedOption);
-            setOptions(new Map([...options, ...mergedOption]));
+            setMediums(mediums => mediums.concat(option[0]));
         }
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("form submitted");
+        const updatedCreative = {
+            "name": name,
+            "instagram": instagram,
+            "email": email,
+            "facebook": facebook,
+            "mediums": mediums
+        }
+        axios.post(`http://localhost:4000/creatives/update/${props.match.params.id}`, updatedCreative)
+        .then(res => console.log(res.data));
+        props.history.push('/');
     }
 
     return (
         <div>
-        <h3>Create New Entry</h3>
+        <h3>Update Entry</h3>
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label>Name: </label>
@@ -99,7 +105,7 @@ function EditCreative(props) {
                 <div className="row mx-0" id="mediums">
                     {
                         Array.from(options.entries()).map((option, index) => (
-                            <div key={option[1][1]} id={option[1][1]} className={"col-4 " + (option[1][0]||mediums.includes(option[0])?"selected":" ")} onClick={(event) => handleMediumsClick(event, option)}>{option[0]}</div>
+                            <div key={option[1]} id={option[1]} className={"col-4 " + (mediums.includes(option[0])?"selected":" ")} onClick={(event) => handleMediumsClick(event, option)}>{option[0]}</div>
                         ))
                     }
                 </div>
