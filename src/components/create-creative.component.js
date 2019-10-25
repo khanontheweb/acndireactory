@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 function CreateCreative() {
     const [name, setName] = useState('');
@@ -47,6 +48,18 @@ function CreateCreative() {
                 mediums.push(key);
         });
         console.log("Form submitted", name, instagram, email, facebook, mediums);
+        
+        const newCreative = {
+            "name": name,
+            "instagram": instagram,
+            "email": email,
+            "facebook": facebook,
+            "mediums": mediums
+        };
+
+        axios.post('http://localhost:4000/creatives/add', newCreative)
+        .then(res => console.log(res.data));
+
         setName('');
         setInstagram('');
         setEmail('');
