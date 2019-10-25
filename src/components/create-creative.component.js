@@ -21,7 +21,7 @@ function CreateCreative() {
             else
                 child.classList.remove("d-none");
         })
-    },[searchedMedium]);    
+    },[searchedMedium]);   
     
     const handleMediumsClick = (event, option) => {
         console.log("Handling the click");
@@ -40,13 +40,13 @@ function CreateCreative() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("Form submitted", name, instagram, email, facebook, options);
+        
         const mediums = [];
         options.forEach((value, key, map) => {
             if(value[0])
                 mediums.push(key);
         });
-
+        console.log("Form submitted", name, instagram, email, facebook, mediums);
         setName('');
         setInstagram('');
         setEmail('');
