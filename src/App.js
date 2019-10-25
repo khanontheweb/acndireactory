@@ -10,12 +10,25 @@ function App() {
   return (
     <Router>
       <div className="container">
-        <h1>ACN Direactory</h1>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <Link to="/" className="navbar-brand">
+            ACN Direactory
+          </Link>
+          <div className="collapse navbar-collapse">
+            <ul className="navbar-nav mr-auto">
+              <li className="navbar-item">
+                <Link to="/" className="nav-link">Creatives</Link>
+              </li>
+              <li className="navbar-item">
+                <Link to="/create" className="nav-link">Submit Yourself</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <Route path="/" exact component={CreativesList}/>
+        <Route path="/edit/:id" exact component={EditCreative}/>
+        <Route path="/create" exact component={CreateCreative}/>
       </div>
-
-      <Route path="/" exact component={CreativesList}/>
-      <Route path="/edit/:id" exact component={EditCreative}/>
-      <Route path="/create" exact component={CreateCreative}/>
     </Router>
   );
 }
