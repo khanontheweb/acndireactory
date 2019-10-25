@@ -13,6 +13,7 @@ function CreateCreative() {
         ["Fashion", [false,3]],
         ["Photography", [false,4]]]
     ));
+    const [mediums, setMediums] = useState([]);
     
     useEffect(() => {
         const mediumsTable = document.getElementById('mediums');
@@ -42,11 +43,12 @@ function CreateCreative() {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        const mediums = [];
+        const selectedMediums = [];
         options.forEach((value, key, map) => {
             if(value[0])
-                mediums.push(key);
+                selectedMediums.push(key);
         });
+        setMediums(selectedMediums);
         console.log("Form submitted", name, instagram, email, facebook, mediums);
         
         const newCreative = {

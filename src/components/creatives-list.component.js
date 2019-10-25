@@ -11,7 +11,7 @@ function CreativesList() {
             setCreatives(response.data);
         })
         .catch(err => console.log(err));
-    }, [creatives]);
+    }, []);
 
     const Creative = props => {
         return(
@@ -22,7 +22,7 @@ function CreativesList() {
                 <td>{props.creative.email}</td>
                 <td>{props.creative.mediums}</td>
                 <td>
-                    <Link to={`/edit/props.creative._id`}>Edit</Link>
+                    <Link to={`/edit/${props.creative._id}`}>Edit</Link>
                 </td>
             </tr>
         )
