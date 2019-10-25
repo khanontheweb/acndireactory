@@ -3,10 +3,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const PORT = 4000;
 const creativeRoutes = express.Router();
+const PORT = 4000;
 
-app.use('/creatives');
+let Creative = require('./models/creative.model');  
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -16,10 +17,6 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 });
-
-app.listen(PORT, () => {
-    console.log(`Server is running on Port:${PORT}`);
-})
 
 creativeRoutes.route('/').get((req, res) => {
     Creative.find((err, creatives) => {
@@ -70,3 +67,10 @@ creativeRoutes.route('/update/:id').post((req, res) => {
         }
     })
 });
+
+app.use('/creatives', creativeRoutes);
+
+app.listen(PORT, () => {
+    console.log(`Server is running on Port:${PORT}`);
+})
+
