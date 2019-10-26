@@ -4,6 +4,8 @@ import axios from 'axios';
 
 function CreativesList() {
     const [creatives, setCreatives] = useState([]);
+    const [searchedName, setSearchedName] = useState('');
+    const [searchedMedium, setSearchedMedium] = useState('');
 
     useEffect(() => {
         axios.get('http://localhost:4000/creatives/')
@@ -38,6 +40,22 @@ function CreativesList() {
     return (
         <div>
             <h3>Creaitves List</h3>
+            <div className="form-group">
+                <label>Name: </label>
+                <input type="text"
+                       className="form-control"
+                       value={searchedName}
+                       onChange={event=>setSearchedName(event.target.value)}
+                       placeholder="Kevin, Daniel, Chang, Lin..."/>
+            </div>
+            <div className="form-group">
+                    <label>Medium: </label>
+                    <input type="text"
+                           className="form-control"
+                           value={searchedMedium}
+                           onChange={event=>setSearchedMedium(event.target.value)}
+                           placeholder="Music, Dance, Video..."/>
+            </div>
             <table className="table table-striped">
                 <thead>
                     <tr>
