@@ -15,9 +15,20 @@ function CreativesList() {
         .catch(err => console.log(err));
     }, []);
 
+    useEffect(() => {
+        const creativesTable = document.getElementById('creatives-table');
+        Array.from(creativesTable.children).filter((child) => {
+            console.log(child.innerHTML);
+            if(!child.innerHTML.toLowerCase().includes(searchedName.toLowerCase()) || !child.innerHTML.toLowerCase().includes(searchedMedium.toLowerCase()))
+                child.classList.add("d-none");
+            else
+                child.classList.remove("d-none");
+        })
+    },[searchedName, searchedMedium]);
+
     const Creative = props => {
         return(
-            <tr>
+            <tr key={props.creative._id}>
                 <td>{props.creative.name}</td>
                 <td>{props.creative.instagram}</td>
                 <td>{props.creative.facebook}</td>
@@ -56,7 +67,7 @@ function CreativesList() {
                            onChange={event=>setSearchedMedium(event.target.value)}
                            placeholder="Music, Dance, Video..."/>
             </div>
-            <table className="table table-striped">
+            <table className="table table-striped" >
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -67,7 +78,7 @@ function CreativesList() {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="creatives-table">
                     {makeList()}
                 </tbody>
             </table>
