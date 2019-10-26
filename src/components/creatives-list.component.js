@@ -41,11 +41,12 @@ function CreativesList() {
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>Name</th>
+                        <th>Instagram</th>
+                        <th>Facebook</th>
+                        <th>Email</th>
+                        <th>Mediums</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>

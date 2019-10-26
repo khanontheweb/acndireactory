@@ -40,8 +40,7 @@ function EditCreative(props) {
     const handleMediumsClick = (event, option) => {
         
         if(mediums.includes(option[0])) {
-            console.log(mediums);
-            console.log(option[0]);
+
             setMediums(mediums.filter(element => { return element !== option[0]}));
         }
         else {

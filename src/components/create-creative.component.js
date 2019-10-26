@@ -28,8 +28,6 @@ function CreateCreative() {
     const handleMediumsClick = (event, option) => {
         
         if(mediums.includes(option[0])) {
-            console.log(mediums);
-            console.log(option[0]);
             setMediums(mediums.filter(element => { return element !== option[0]}));
         }
         else {
@@ -39,9 +37,7 @@ function CreateCreative() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        
-        console.log("Form submitted", name, instagram, email, facebook, mediums);
-        
+    
         const newCreative = {
             "name": name,
             "instagram": instagram,
