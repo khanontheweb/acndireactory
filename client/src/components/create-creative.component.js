@@ -46,7 +46,7 @@ function CreateCreative() {
             "mediums": mediums
         };
 
-        axios.post('http://localhost:4000/creatives/add', newCreative)
+        axios.post('https://acndireactory.herokuapp.com/creatives/add', newCreative)
         .then(res => console.log(res.data));
 
         setName('');

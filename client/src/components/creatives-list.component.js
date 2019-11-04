@@ -12,7 +12,7 @@ function CreativesList() {
     const [searchedMedium, setSearchedMedium] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:4000/creatives/')
+        axios.get('https://acndireactory.herokuapp.com/creatives/')
         .then(response => setCreatives(response.data))
         .catch(err => console.log(err));
     }, []);
