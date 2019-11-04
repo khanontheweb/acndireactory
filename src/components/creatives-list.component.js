@@ -2,18 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+//TODO:
+//Make mediums separated by commas
+//Give the ability to search with multiple names/mediums
+//Change search state objects into arrays for the above
 function CreativesList() {
     const [creatives, setCreatives] = useState([]);
     const [searchedName, setSearchedName] = useState('');
     const [searchedMedium, setSearchedMedium] = useState('');
 
-    useEffect(() => {
-        axios.get('http://localhost:4000/creatives/')
-        .then(response => {
-            setCreatives(response.data);
-        })
-        .catch(err => console.log(err));
-    }, []);
+  
 
     useEffect(() => {
         const creativesTable = document.getElementById('creatives-table');

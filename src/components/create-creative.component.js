@@ -53,10 +53,7 @@ function CreateCreative() {
         setInstagram('');
         setEmail('');
         setFacebook('');
-        setOptions(new Map( [["Music", [false,1]],
-        ["Dance", [false,2]],
-        ["Fashion", [false,3]],
-        ["Photography", [false,4]]]));
+        setMediums([]);
     }
 
     return (
